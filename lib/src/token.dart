@@ -232,7 +232,7 @@ class Contact {
       postalCode: json['postalCode'] ?? "",
       state: json['state'] ?? json['administrativeArea'] ?? "",
       city: json['city'] ?? json['locality'] ?? "",
-      street: json['street'] ?? json['address1'] != null ? json['address1'] + json['address2'] : "",
+      street: json['street'] ?? (json['address1'] != null ? json['address1'] + json['address2'] : ""),
       isoCountryCode: json['ISOCountryCode'] ?? json['countryCode'] ?? "",
       subAdministrativeArea: json['subAdministrativeArea'] ?? "",
       subLocality: json['subLocality'] ?? json['locality'] ?? "",
