@@ -4,10 +4,10 @@ class Token {
   double? created;
   bool? livemode;
   String? tokenId;
-  Extra? extra;
+  Extra extra;
 
   Token(
-      {this.bankAccount, this.card, this.created, this.livemode, this.tokenId, this.extra});
+      {this.bankAccount, this.card, this.created, this.livemode, this.tokenId, required this.extra});
 
   factory Token.fromJson(Map<dynamic, dynamic> json) {
     return Token(
@@ -19,7 +19,8 @@ class Token {
           : json['created'],
       livemode: json['livemode'],
       tokenId: json['tokenId'],
-      extra: json['extra'] != null ? Extra.fromJson(json['extra']) : null,
+      extra: json['extra'] != null ? Extra.fromJson(json['extra']) : Extra(
+          shippingContact: Contact(), billingContact: Contact()),
     );
   }
 
@@ -35,7 +36,7 @@ class Token {
       data['card'] = this.card!.toJson();
     }
     if (this.extra != null) {
-      data['extra'] = this.extra.toJson();
+      data['extra'] = this.extra!.toJson();
     }
 
     return data;
@@ -184,8 +185,8 @@ class Extra {
   Contact shippingContact;
   Contact billingContact;
 
-  Extra({this.shippingContact,
-    this.billingContact});
+  Extra({required this.shippingContact,
+    required this.billingContact});
 
   factory Extra.fromJson(Map<dynamic, dynamic> json) {
     return Extra(
